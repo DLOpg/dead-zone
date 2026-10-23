@@ -113,9 +113,10 @@ local function visual(parent,asset,name,x,z,span,angle)
     local biggest=math.max(size.X,size.Z,0.1)
     local scale=math.clamp(span/biggest,.12,6)
     pcall(function() m:ScaleTo(scale) end)
-    local _,now=m:GetBoundingBox()
+    local boxCf,now=m:GetBoundingBox()
     local y=gY(x,z)
-    m:PivotTo(CFrame.new(x,y+now.Y/2,z)*CFrame.Angles(0,math.rad(angle or 0),0))
+    local target=CFrame.new(x,y+now.Y/2,z)*CFrame.Angles(0,math.rad(angle or 0),0)
+    m:PivotTo(target*boxCf:Inverse()*m:GetPivot())
     return m
 end
 
