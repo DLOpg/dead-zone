@@ -33,6 +33,9 @@
       },
       "DZ_UserFavoritesInstaller": {
         "$path": "src/server/DZ_UserFavoritesInstaller.luau"
+      },
+      "DZ_RealForestV2": {
+        "$path": "src/server/DZ_RealForestV2.luau"
       }
     },
     "StarterPlayer": {
