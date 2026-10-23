@@ -15,6 +15,9 @@
       },
       "DZ_RojoSyncCheck": {
         "$path": "src/server/DZ_RojoSyncCheck.server.luau"
+      },
+      "DZ_GreenValleyBootstrap": {
+        "$path": "src/server/DZ_GreenValleyBootstrap.luau"
       }
     },
     "StarterPlayer": {
