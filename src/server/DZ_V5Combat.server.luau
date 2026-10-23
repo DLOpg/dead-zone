@@ -5,6 +5,7 @@ local Players=game:GetService("Players")
 local RunService=game:GetService("RunService")
 local ReplicatedStorage=game:GetService("ReplicatedStorage")
 local Workspace=game:GetService("Workspace")
+local ServerStorage=game:GetService("ServerStorage")
 local GAME_FOLDER="DZ_V5_GAMEPLAY"
 local weaponEvent=ReplicatedStorage:FindFirstChild("DZ_V5WeaponEvent")
 if not weaponEvent then
@@ -153,6 +154,23 @@ local function equipTool(player,name)
     t.RequiresHandle=false
     t.CanBeDropped=false
     t.ToolTip=name=="DZ_Pistolet" and "Clic pour tirer | 12 munitions" or "F ou clic pour frapper"
+    if name=="DZ_Pistolet" then
+        local visuals=ServerStorage:FindFirstChild("DZ_V5_WEAPON_VISUALS")
+        local template=visuals and visuals:FindFirstChild("DZ_PistoletVisual")
+        local visualHandle=template and template:FindFirstChild("Handle",true)
+        if visualHandle and visualHandle:IsA("BasePart") then
+            local handle=visualHandle:Clone()
+            handle.Name="Handle"
+            handle.Anchored=false
+            handle.CanCollide=false
+            handle.CanTouch=false
+            handle.Massless=true
+            handle.Size=handle.Size
+            handle.Parent=t
+            t.RequiresHandle=true
+            t.Grip=CFrame.new(0,-.1,0)*CFrame.Angles(math.rad(-90),0,0)
+        end
+    end
     t.Parent=backpack
 end
 local function giveTools(player)
