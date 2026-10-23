@@ -13,6 +13,12 @@ if not weaponEvent then
     weaponEvent.Parent=ReplicatedStorage
 end
 
+local world=Workspace:WaitForChild("DZ_RECOVERY_WORLD",60)
+if not world then
+    warn("[DZ V5 COMBAT] Monde absent : création des infectés annulée.")
+    return
+end
+
 local creatures={}
 local attackTimes={}
 local zombieHits={}
