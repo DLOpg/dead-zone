@@ -16,6 +16,37 @@ local function activate(tool)
     end
 end
 
+-- Affichage compact des munitions et éliminations, sans modifier le HUD actuel.
+local function installStatus()
+    local pg=player:WaitForChild("PlayerGui",25)
+    if not pg then return end
+    local gui=pg:FindFirstChild("DZ_RecoveryHUD") or pg:WaitForChild("DZ_RecoveryHUD",25)
+    if not gui then return end
+    local label=gui:FindFirstChild("DZ_V5Ammo")
+    if not label then
+        label=Instance.new("TextLabel")
+        label.Name="DZ_V5Ammo"
+        label.Size=UDim2.fromOffset(205,58)
+        label.Position=UDim2.new(0,15,1,-86)
+        label.BackgroundColor3=Color3.fromRGB(35,43,39)
+        label.BackgroundTransparency=.08
+        label.TextColor3=Color3.fromRGB(240,225,185)
+        label.BorderSizePixel=0
+        label.Font=Enum.Font.GothamMedium
+        label.TextSize=14
+        label.TextXAlignment=Enum.TextXAlignment.Left
+        label.Parent=gui
+    end
+    local function refresh()
+        label.Text=string.format("  PISTOLET  %d / 12\\n  Infectés éliminés : %d",
+            player:GetAttribute("DZAmmo") or 0, player:GetAttribute("DZZombieKills") or 0)
+    end
+    player:GetAttributeChangedSignal("DZAmmo"):Connect(refresh)
+    player:GetAttributeChangedSignal("DZZombieKills"):Connect(refresh)
+    refresh()
+end
+task.spawn(installStatus)
+
 local hooked={}
 local function hook(tool)
     if not tool:IsA("Tool") or hooked[tool] then return end
