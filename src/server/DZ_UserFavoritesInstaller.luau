@@ -119,6 +119,21 @@ local function visual(parent,asset,name,x,z,span,angle)
     return m
 end
 
+local function hideOriginalBuilding(world, buildingName)
+    local buildings=world:FindFirstChild("Batiments")
+    local original=buildings and buildings:FindFirstChild(buildingName)
+    if not original then return end
+    for _,part in ipairs(original:GetDescendants()) do
+        if part:IsA("BasePart") and part.Name~="Plancher" then
+            if part:GetAttribute("DZ_OldTransparency")==nil then
+                part:SetAttribute("DZ_OldTransparency",part.Transparency)
+            end
+            part.Transparency=1
+            -- Les anciennes collisions restent en place pour protéger l'intérieur.
+        end
+    end
+end
+
 local function firstRenderable(root)
     -- For a pack of varied tree models, prefer independent children; if there
     -- aren't any, use the asset container as one variation.
@@ -207,8 +222,10 @@ function M.Install()
             local ok,err=pcall(function()
                 if item.key=="horror_house_building" then
                     visual(container,asset,"DZ_HorrorHouse", -175,-145,30,0)
+                    hideOriginalBuilding(world,"Ferme du reveil")
                 elseif item.key=="village_house" then
                     visual(container,asset,"DZ_VillageHouse", -125,135,30,0)
+                    hideOriginalBuilding(world,"Maison Miller")
                 elseif item.key=="realistic_trees" then
                     vegetation(container,asset)
                 elseif item.key=="pistol_visual" then
@@ -229,4 +246,28 @@ function M.Install()
     end
     return success>0
 end
+
+function M.Restore()
+    assert(RunService:IsStudio() and not RunService:IsRunning(),
+        "Restauration uniquement en mode Edition.")
+    local world=Workspace:FindFirstChild("DZ_RECOVERY_WORLD")
+    if not world then return false end
+    local buildings=world:FindFirstChild("Batiments")
+    if buildings then
+        for _,part in ipairs(buildings:GetDescendants()) do
+            if part:IsA("BasePart") then
+                local previous=part:GetAttribute("DZ_OldTransparency")
+                if previous~=nil then
+                    part.Transparency=previous
+                    part:SetAttribute("DZ_OldTransparency",nil)
+                end
+            end
+        end
+    end
+    local visuals=world:FindFirstChild(VIEW)
+    if visuals then visuals:Destroy() end
+    log("Anciens batiments retrouves ; visuels favoris retires.")
+    return true
+end
+
 return M
