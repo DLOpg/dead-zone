@@ -30,6 +30,9 @@
       },
       "DZ_CreatorStoreImporter": {
         "$path": "src/server/DZ_CreatorStoreImporter.luau"
+      },
+      "DZ_UserFavoritesInstaller": {
+        "$path": "src/server/DZ_UserFavoritesInstaller.luau"
       }
     },
     "StarterPlayer": {
@@ -48,6 +51,9 @@
       "$ignoreUnknownInstances": true,
       "DZ_CreatorStoreCatalog": {
         "$path": "src/shared/DZ_CreatorStoreCatalog.luau"
+      },
+      "DZ_UserFavoritesCatalog": {
+        "$path": "src/shared/DZ_UserFavoritesCatalog.luau"
       }
     }
   }
