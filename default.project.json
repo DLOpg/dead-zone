@@ -36,6 +36,9 @@
       },
       "DZ_RealForestV2": {
         "$path": "src/server/DZ_RealForestV2.luau"
+      },
+      "DZ_ExpandedFavoritesInstaller": {
+        "$path": "src/server/DZ_ExpandedFavoritesInstaller.luau"
       }
     },
     "StarterPlayer": {
@@ -57,6 +60,9 @@
       },
       "DZ_UserFavoritesCatalog": {
         "$path": "src/shared/DZ_UserFavoritesCatalog.luau"
+      },
+      "DZ_ExpandedFavoritesCatalog": {
+        "$path": "src/shared/DZ_ExpandedFavoritesCatalog.luau"
       }
     }
   }
