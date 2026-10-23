@@ -18,6 +18,15 @@
       },
       "DZ_GreenValleyBootstrap": {
         "$path": "src/server/DZ_GreenValleyBootstrap.luau"
+      },
+      "DZ_GreenValleyV5": {
+        "$path": "src/server/DZ_GreenValleyV5.luau"
+      },
+      "DZ_GreenValleyV5Runner": {
+        "$path": "src/server/DZ_GreenValleyV5Runner.server.luau"
+      },
+      "DZ_V5Combat": {
+        "$path": "src/server/DZ_V5Combat.server.luau"
       }
     },
     "StarterPlayer": {
@@ -26,6 +35,9 @@
         "$ignoreUnknownInstances": true,
         "DZ_RecoveryClient": {
           "$path": "src/client/DZ_RecoveryClient.client.luau"
+        },
+        "DZ_V5Weapons": {
+          "$path": "src/client/DZ_V5Weapons.client.luau"
         }
       }
     }
