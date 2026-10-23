@@ -189,7 +189,7 @@ local function onAttack(player,action,lookDir)
     if direction:Dot(hrp.CFrame.LookVector)<-.65 then return end
     local params=RaycastParams.new()
     params.FilterType=Enum.RaycastFilterType.Exclude
-    params.FilterDescendantsInstances={ch,root:FindFirstChild("Effects")}
+    params.FilterDescendantsInstances={ch}
     params.IgnoreWater=true
     local hit=Workspace:Raycast(origin,direction*110,params)
     local hitPart=hit and hit.Instance
