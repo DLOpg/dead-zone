@@ -38,7 +38,7 @@ local function installStatus()
         label.Parent=gui
     end
     local function refresh()
-        label.Text=string.format("  PISTOLET  %d / 12\\n  Infectés éliminés : %d",
+        label.Text=string.format("  PISTOLET  %d / 12\n  Infectés éliminés : %d",
             player:GetAttribute("DZAmmo") or 0, player:GetAttribute("DZZombieKills") or 0)
     end
     player:GetAttributeChangedSignal("DZAmmo"):Connect(refresh)
