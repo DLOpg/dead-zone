@@ -31,7 +31,6 @@ local function purgeScripts(source)
     local removed=0
     for _,v in ipairs(source:GetDescendants()) do
         if v:IsA("LuaSourceContainer") then
-            if v:IsA('Script') or v:IsA('LocalScript') then v.Disabled=true end
             v:Destroy()
             removed+=1
         elseif v:IsA("RemoteEvent") or v:IsA("RemoteFunction")
