@@ -38,7 +38,8 @@ end
 local spots={Camp=Vector3.new(-105,15,-45),Farm=Vector3.new(-190,15,-170)}
 evt.OnServerEvent:Connect(function(pl,action)
  if action=='Attack' then
-  evt:FireClient(pl,'Dialogue','Attaque de test : les zombies seront ajoutés au prochain lot.')
+  -- Compatibilite avec l'ancien raccourci F ; le combat V5 gere les degats.
+  return
  elseif RunService:IsStudio() and type(action)=='string' then
   if action=='Heal' then
    pl:SetAttribute('DZHealth',100);pl:SetAttribute('DZHunger',100);pl:SetAttribute('DZThirst',100)
