@@ -31,7 +31,7 @@ local function purgeScripts(source)
     local removed=0
     for _,v in ipairs(source:GetDescendants()) do
         if v:IsA("LuaSourceContainer") then
-            v.Disabled=true
+            if v:IsA('Script') or v:IsA('LocalScript') then v.Disabled=true end
             v:Destroy()
             removed+=1
         elseif v:IsA("RemoteEvent") or v:IsA("RemoteFunction")
@@ -106,7 +106,7 @@ local function importOne(item)
 end
 
 function M.Import(limit)
-    assert(RunService:IsStudio(),"Import Creator Store réservé à Roblox Studio")
+    assert(RunService:IsStudio() and not RunService:IsRunning(),"Import Creator Store réservé à Studio en mode ÉDITION")
     local total=0
     limit=math.clamp(tonumber(limit) or 4,1,17)
     for _,item in ipairs(Catalog) do
@@ -123,7 +123,7 @@ function M.Import(limit)
 end
 
 function M.ImportKey(key)
-    assert(RunService:IsStudio(),"Import réservé à Studio")
+    assert(RunService:IsStudio() and not RunService:IsRunning(),"Import réservé au mode ÉDITION")
     for _,item in ipairs(Catalog) do
         if item.key==key then
             local ok,msg=importOne(item)
@@ -135,7 +135,7 @@ function M.ImportKey(key)
 end
 
 function M.AttachToolbox(key,object)
-    assert(RunService:IsStudio(),"Réservé à Studio")
+    assert(RunService:IsStudio() and not RunService:IsRunning(),"Réservé à Studio en mode ÉDITION")
     assert(typeof(object)=="Instance" and object:IsDescendantOf(game),"Passer un modèle déjà dans Studio")
     local storage=pool()
     local copy=object:Clone()
@@ -151,7 +151,7 @@ function M.AttachToolbox(key,object)
 end
 
 function M.Approve(key)
-    assert(RunService:IsStudio(),"Réservé à Studio")
+    assert(RunService:IsStudio() and not RunService:IsRunning(),"Réservé à Studio en mode ÉDITION")
     local source=pool():FindFirstChild(key)
     if not source then return false,"modèle manquant" end
     purgeScripts(source)
@@ -230,7 +230,7 @@ local function modelAtLocation(source,key,container,position,width)
 end
 
 function M.Preview()
-    assert(RunService:IsStudio(),"Réservé à Studio")
+    assert(RunService:IsStudio() and not RunService:IsRunning(),"Réservé à Studio en mode ÉDITION")
     local world=Workspace:FindFirstChild("DZ_RECOVERY_WORLD")
     if not world then return false,"DZ_RECOVERY_WORLD absent. Générer la map avant." end
     local staging=pool()
