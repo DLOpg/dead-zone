@@ -105,19 +105,21 @@ local function importOne(item)
 end
 
 function M.Import(limit)
-    assert(RunService:IsStudio() and not RunService:IsRunning(),"Import Creator Store réservé à Studio en mode ÉDITION")
-    local total=0
-    limit=math.clamp(tonumber(limit) or 4,1,17)
+    assert(RunService:IsStudio() and not RunService:IsRunning(),"Importer uniquement en mode EDITION")
+    limit=math.clamp(math.floor(tonumber(limit) or 4),1,#Catalog)
+    local attempts=0
+    local successes=0
     for _,item in ipairs(Catalog) do
-        if total>=limit then break end
+        if attempts>=limit then break end
         if item.status=="candidate" then
+            attempts+=1
             local ok,msg=importOne(item)
             statuses[item.key]={ok=ok,message=msg}
-            if ok then total+=1 end
-            report(item.key.." : "..(ok and "OK" or "IMPOSSIBLE").." - "..msg)
+            if ok then successes+=1 end
+            report(item.key.." : "..(ok and "OK" or "REFUSE").." - "..msg)
         end
     end
-    report("Bibliothèque: ServerStorage/"..POOL_NAME)
+    report("Tentatives : "..attempts.." | Succès : "..successes..". En cas de refus, utiliser la Toolbox Studio.")
     return statuses
 end
 
@@ -137,8 +139,12 @@ function M.AttachToolbox(key,object)
     assert(RunService:IsStudio() and not RunService:IsRunning(),"Réservé à Studio en mode ÉDITION")
     assert(typeof(object)=="Instance" and object:IsDescendantOf(game),"Passer un modèle déjà dans Studio")
     local storage=pool()
+    if storage:FindFirstChild(key) then
+        report(key.." déjà présent dans la bibliothèque (aucun doublon).")
+        return false,"déjà présent"
+    end
     local copy=object:Clone()
-    if childParts(copy)==0 then copy:Destroy() return false end
+    if childParts(copy)==0 then copy:Destroy() return false,"aucune pièce 3D" end
     purgeScripts(copy)
     visualize(copy)
     copy.Name=key
