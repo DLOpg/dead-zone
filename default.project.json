@@ -8,7 +8,6 @@
         "$path": "src/server/DZ_RecoveryServer.server.luau"
       },
       "DZ_GreenValleyV4": {
-        "$className": "ModuleScript",
         "$path": "src/server/DZ_GreenValleyV4.luau"
       },
       "DZ_GreenValleyV4Runner": {
