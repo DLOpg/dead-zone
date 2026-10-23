@@ -1,0 +1,27 @@
+{
+  "name": "DEAD_ZONE_REBUILD",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$ignoreUnknownInstances": true,
+      "DZRebuild": {
+        "$path": "rebuild/src/shared"
+      }
+    },
+    "ServerScriptService": {
+      "$ignoreUnknownInstances": true,
+      "DZRebuild": {
+        "$path": "rebuild/src/server"
+      }
+    },
+    "StarterPlayer": {
+      "$ignoreUnknownInstances": true,
+      "StarterPlayerScripts": {
+        "$ignoreUnknownInstances": true,
+        "DZ_RebuildClient": {
+          "$path": "rebuild/src/client/DZ_RebuildClient.client.luau"
+        }
+      }
+    }
+  }
+}
