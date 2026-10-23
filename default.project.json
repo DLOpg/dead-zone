@@ -3,12 +3,22 @@
   "tree": {
     "$className": "DataModel",
     "ServerScriptService": {
+      "$ignoreUnknownInstances": true,
       "DZ_RecoveryServer": {
         "$path": "src/server/DZ_RecoveryServer.server.luau"
+      },
+      "DZ_GreenValleyV4": {
+        "$className": "ModuleScript",
+        "$path": "src/server/DZ_GreenValleyV4.luau"
+      },
+      "DZ_GreenValleyV4Runner": {
+        "$path": "src/server/DZ_GreenValleyV4Runner.server.luau"
       }
     },
     "StarterPlayer": {
+      "$ignoreUnknownInstances": true,
       "StarterPlayerScripts": {
+        "$ignoreUnknownInstances": true,
         "DZ_RecoveryClient": {
           "$path": "src/client/DZ_RecoveryClient.client.luau"
         }
