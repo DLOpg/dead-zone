@@ -1,0 +1,18 @@
+{
+  "name": "DEAD_ZONE",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "DZ_RecoveryServer": {
+        "$path": "src/server/DZ_RecoveryServer.server.luau"
+      }
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "DZ_RecoveryClient": {
+          "$path": "src/client/DZ_RecoveryClient.client.luau"
+        }
+      }
+    }
+  }
+}
